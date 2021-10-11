@@ -61,15 +61,19 @@ const Login = (props) => {
     // setEnteredPassword(event.target.value);
   };
 
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+
   useEffect(() => {
+    console.log('validity changed');
     let identifier = setTimeout(() => {
-      setFormIsValid(emailState.isValid && passwordState.isValid);
+      setFormIsValid(emailIsValid && passwordIsValid);
     }, 500);
 
     return () => {
       clearTimeout(identifier);
     };
-  }, [emailState, passwordState]);
+  }, [emailIsValid, passwordIsValid]);
 
   const validateEmailHandler = () => {
     dispatchEmail({ type: INPUT_BLUR });
